@@ -6,16 +6,33 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 const DEBOUNCE_DELAY = 300;
 
 const inputCountry = document.querySelector('#search-box');
+
 const listCountry = document.querySelector('.country-list');
 const infoCountry = document.querySelector('.country-info');
-inputCountry.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
+inputCountry.addEventListener('input', debounce(onTargetInput, DEBOUNCE_DELAY));
+document.addEventListener('click', onClick);
 
-function onInput(evt) {
+function onClick(evt) {
+  if (evt.target.nodeName !== 'P') {
+    return;
+  }
+  console.log(evt.target.textContent);
+  console.log(inputCountry.value);
+  inputCountry.value = evt.target.textContent.trim();
+  onInput(inputCountry.value);
+}
+
+function onTargetInput(evt) {
+  const inputValue = evt.target.value.trim();
+  onInput(inputValue);
+}
+
+function onInput(inputValue) {
   //   console.dir(evt);
   //   console.dir(evt.target);
   //   console.log(evt.target.value.trim());
-  const inputValue = evt.target.value.trim();
-  clearCountryInfo;
+  //   const inputValue = evt.target.value.trim();
+  clearCountryInfo();
   if (!inputValue) {
     return;
   }

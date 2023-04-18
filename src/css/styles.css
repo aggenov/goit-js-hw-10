@@ -46,9 +46,9 @@ body {
   font-size: var(--head-font-size);
 }
 
-/* .country-name {
+.country-name {
   cursor: pointer;
 }
 .country-name:hover {
   color: blue;
-} */
+}
